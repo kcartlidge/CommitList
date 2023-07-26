@@ -49,6 +49,11 @@ namespace CommitList
 
         public static string Bold(string text)
         {
+            // MOST Windows terminals by default don't do ANSI bold.
+            // When they do it is often disabled by default.
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                return text;
+
             return $"\u001b[1m{text}\u001b[0m";
         }
     }
